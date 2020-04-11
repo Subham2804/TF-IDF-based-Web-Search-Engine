@@ -34,18 +34,25 @@ def word_preprocessing(list):
 
 
 if __name__ =="__main__":
+    print("Please enter the URLs saperated by a space" )
     urls=input().strip().split()
     index(urls)
     l1=[]
     l2=tagrem.text_parser(urls,l1)
+    print("Please enter the query saperated by space")
     query=input().strip().split()
+    print("The entered urls are")
+    for i in range(len(urls)):
+        print(i +":"+urls[i])
     query=word_preprocessing(query)
     table = TfIdf()
     for i in range(len(urls)):
         table.add_document(str(i),l2[i])
     x=table.similarities(query) 
+    print("URLs Indexed by cosine rankings are")
     for i in x:
-        print(x[0])   
+        a=int(x[i][0])
+        print(i+":"+urls[a]) 
 
 
     
