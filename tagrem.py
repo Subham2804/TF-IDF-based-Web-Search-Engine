@@ -4,10 +4,8 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import pickle 
 import os
-
-
 from bs4 import BeautifulSoup
-def text_parser(urls):
+def text_parser(urls,l):
         lemmatizer = WordNetLemmatizer() 
 
         for i in range(len(urls)):
@@ -30,9 +28,6 @@ def text_parser(urls):
                 text = '\n'.join(chunk for chunk in chunks if chunk)
         
                 tokens=word_tokenize(text)
-                l1= [lemmatizer.lemmatize(w.lower()) for w in tokens if not w in stopwords.words('english')]
-                pickle_addr=os.getcwd()+"/pickledata/pickle"+str(i)+".pkl"
-                if not os.path.exists(os.getcwd()+"/pickledata"):
-                        os.mkdir(os.getcwd()+"/pickledata")
-                with open(pickle_addr, 'wb') as fl:
-                        pickle.dump(l1, fl)
+                x= [lemmatizer.lemmatize(w.lower()) for w in tokens if not w in stopwords.words('english')]
+                l.append(x)
+        return l        
